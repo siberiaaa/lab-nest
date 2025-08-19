@@ -8,6 +8,7 @@ import { CategoriasModule } from './categorias/categorias.module';
 import { RolesModule } from './roles/roles.module';
 import { InventariosModule } from './inventarios/inventarios.module';
 import { MovimientosModule } from './movimientos/movimientos.module';
+import { TipoMovimientosModule } from './tipo_movimientos/tipo_movimientos.module';
 
 @Module({
   imports: [TypeOrmModule.forRoot({
@@ -21,7 +22,7 @@ import { MovimientosModule } from './movimientos/movimientos.module';
       // database: 'laboratorioNestjs', 
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       synchronize: true, // solo en desarrollo
-    }), ProductosModule, UsuariosModule, CategoriasModule, RolesModule, InventariosModule, MovimientosModule,],
+    }), ProductosModule, UsuariosModule, CategoriasModule, RolesModule, InventariosModule, MovimientosModule, TipoMovimientosModule,],
   controllers: [AppController],
   providers: [AppService],
 })
