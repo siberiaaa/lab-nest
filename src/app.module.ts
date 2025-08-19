@@ -6,6 +6,8 @@ import { ProductosModule } from './productos/productos.module';
 import { UsuariosModule } from './usuarios/usuarios.module';
 import { CategoriasModule } from './categorias/categorias.module';
 import { RolesModule } from './roles/roles.module';
+import { InventariosModule } from './inventarios/inventarios.module';
+import { MovimientosModule } from './movimientos/movimientos.module';
 
 @Module({
   imports: [TypeOrmModule.forRoot({
@@ -13,11 +15,13 @@ import { RolesModule } from './roles/roles.module';
       host: 'localhost',
       port: 5432,
       username: 'postgres',
-      password: '12345',
+      password: '12345', 
+      // password: 'anapaula2006', 
       database: 'labnest',
+      // database: 'laboratorioNestjs', 
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       synchronize: true, // solo en desarrollo
-    }), ProductosModule, UsuariosModule, CategoriasModule, RolesModule,],
+    }), ProductosModule, UsuariosModule, CategoriasModule, RolesModule, InventariosModule, MovimientosModule,],
   controllers: [AppController],
   providers: [AppService],
 })
