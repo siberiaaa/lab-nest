@@ -12,11 +12,12 @@ export class Inventario {
     @Column('integer')
     cantidadActual : number
 
-    @Column('integer', { nullable: true })
-    maximo : number
+    // Creo que no debería furular ya que categoría nos da esta información ya
+    // @Column('integer', { nullable: true })
+    // maximo : number
 
-    @Column('integer', { unique: true })
-    minimo : number
+    // @Column('integer', { unique: true })
+    // minimo : number
 
     @CreateDateColumn()
     registrado: Date;

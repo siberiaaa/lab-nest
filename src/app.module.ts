@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -11,26 +12,25 @@ import { MovimientosModule } from './movimientos/movimientos.module';
 import { TipoMovimientosModule } from './tipo_movimientos/tipo_movimientos.module';
 
 @Module({
-  imports: [TypeOrmModule.forRoot({
-      // type: 'postgres',
-      // host: 'localhost',
-      // port: 5432,
-      // username: 'postgres',
-      // // password: '12345', 
-      // password: 'anapaula2006', 
-      // // database: 'labnest',
-      // database: 'laboratorioNestjs', 
-      // entities: [__dirname + '/**/*.entity{.ts,.js}'],
-      // synchronize: true, // solo en desarrollo
-      type: 'postgres',
-      host: 'localhost',
-      port: 5432,
-      username: 'postgres',
-      password: 'anapaula2006',
-      database: 'laboratorioNestjs',
-      entities: [__dirname + '/**/*.entity{.ts,.js}'],
-      synchronize: true,
-    }), ProductosModule, UsuariosModule, CategoriasModule, RolesModule, InventariosModule, MovimientosModule, TipoMovimientosModule,],
+  imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
+    TypeOrmModule.forRootAsync({
+      imports: [ConfigModule],
+      useFactory: (configService: ConfigService) => ({
+        type: 'postgres',
+        host: configService.get<string>('DB_HOST'),
+        port: 5432,
+        username: configService.get<string>('DB_USERNAME'), // Lee la variable de entorno
+        password: configService.get<string>('DB_PASSWORD'),
+        database: configService.get<string>('DB_DATABASE'),
+        entities: [__dirname + '/**/*.entity{.ts,.js}'],
+        synchronize: true,
+      }),
+      inject: [ConfigService],
+    }),
+    ProductosModule, UsuariosModule, CategoriasModule, RolesModule, InventariosModule, MovimientosModule, TipoMovimientosModule,],
   controllers: [AppController],
   providers: [AppService],
 })
