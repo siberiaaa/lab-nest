@@ -1,4 +1,4 @@
-import { Movimiento } from './movimiento';
+import { Movimiento } from './movimiento.entity';
 
 describe('Movimiento', () => {
   it('should be defined', () => {

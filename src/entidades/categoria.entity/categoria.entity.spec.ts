@@ -1,4 +1,4 @@
-import { Categoria } from './categoria';
+import { Categoria } from './categoria.entity';
 
 describe('Categoria', () => {
   it('should be defined', () => {

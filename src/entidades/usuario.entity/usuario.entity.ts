@@ -1,5 +1,5 @@
 import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryColumn, UpdateDateColumn } from "typeorm";
-import { Rol } from "../rol/rol";
+import { Rol } from "../rol.entity/rol.entity";
 
 @Entity()
 export class Usuario {
@@ -20,6 +20,9 @@ export class Usuario {
 
     @Column('text')
     genero : string
+
+    @Column('text')
+    contraseña : string
 
     @CreateDateColumn()
     registrado: Date;

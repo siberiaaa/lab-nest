@@ -1,4 +1,4 @@
-import { Inventario } from './inventario';
+import { Inventario } from './inventario.entity';
 
 describe('Inventario', () => {
   it('should be defined', () => {

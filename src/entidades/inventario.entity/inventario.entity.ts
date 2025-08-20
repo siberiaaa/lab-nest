@@ -1,4 +1,5 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Movimiento } from "../movimiento.entity/movimiento.entity";
 
 @Entity()
 export class Inventario {
@@ -22,4 +23,7 @@ export class Inventario {
     
     @UpdateDateColumn()
     modificado: Date;
+
+    @OneToMany(() => Movimiento, (movimiento) => movimiento.id)
+    movimientos : Movimiento[]
 }

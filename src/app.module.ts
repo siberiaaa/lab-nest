@@ -12,16 +12,24 @@ import { TipoMovimientosModule } from './tipo_movimientos/tipo_movimientos.modul
 
 @Module({
   imports: [TypeOrmModule.forRoot({
+      // type: 'postgres',
+      // host: 'localhost',
+      // port: 5432,
+      // username: 'postgres',
+      // // password: '12345', 
+      // password: 'anapaula2006', 
+      // // database: 'labnest',
+      // database: 'laboratorioNestjs', 
+      // entities: [__dirname + '/**/*.entity{.ts,.js}'],
+      // synchronize: true, // solo en desarrollo
       type: 'postgres',
       host: 'localhost',
       port: 5432,
       username: 'postgres',
-      password: '12345', 
-      // password: 'anapaula2006', 
-      database: 'labnest',
-      // database: 'laboratorioNestjs', 
+      password: 'anapaula2006',
+      database: 'laboratorioNestjs',
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
-      synchronize: true, // solo en desarrollo
+      synchronize: true,
     }), ProductosModule, UsuariosModule, CategoriasModule, RolesModule, InventariosModule, MovimientosModule, TipoMovimientosModule,],
   controllers: [AppController],
   providers: [AppService],

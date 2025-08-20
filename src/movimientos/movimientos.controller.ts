@@ -1,4 +1,7 @@
 import { Controller } from '@nestjs/common';
+import { MovimientosService } from './movimientos.service';
 
 @Controller('movimientos')
-export class MovimientosController {}
+export class MovimientosController {
+    constructor(private readonly service : MovimientosService) {}
+}

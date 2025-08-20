@@ -1,12 +1,12 @@
 import { Column, CreateDateColumn, Entity, OneToMany, PrimaryColumn, UpdateDateColumn } from "typeorm";
-import { Usuario } from "../usuario/usuario";
+import { Movimiento } from "../movimiento.entity/movimiento.entity";
 
 @Entity()
-export class Rol {
+export class TipoMovimiento {
     @PrimaryColumn('text')
     nombre : string
 
-    @Column('text', { nullable: true })
+    @Column('text')
     descripcion : string
 
     @CreateDateColumn()
@@ -15,6 +15,6 @@ export class Rol {
     @UpdateDateColumn()
     modificado: Date;
 
-    @OneToMany(() => Usuario, (usuario) => usuario.correo)
-    usuarios : Usuario[]
+    @OneToMany(() => Movimiento, (movimiento) => movimiento.id)
+    movimientos : Movimiento[]
 }
