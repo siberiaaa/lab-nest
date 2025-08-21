@@ -7,4 +7,4 @@ async function bootstrap() {
   console.log('http://localhost:3000');
   
 }
-bootstrap();
+void bootstrap();

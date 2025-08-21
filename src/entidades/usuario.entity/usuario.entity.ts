@@ -1,4 +1,4 @@
-import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryColumn, UpdateDateColumn } from "typeorm";
 import { Rol } from "../rol.entity/rol.entity";
 
 @Entity()
@@ -31,5 +31,6 @@ export class Usuario {
     modificado: Date;
 
     @ManyToOne(() => Rol, (rol) => rol.nombre)
+    // @JoinColumn({ name: 'rolNombre' })
     rol : Rol
 }

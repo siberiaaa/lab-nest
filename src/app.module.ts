@@ -10,6 +10,9 @@ import { RolesModule } from './roles/roles.module';
 import { InventariosModule } from './inventarios/inventarios.module';
 import { MovimientosModule } from './movimientos/movimientos.module';
 import { TipoMovimientosModule } from './tipo_movimientos/tipo_movimientos.module';
+import { AuthModule } from './auth/auth.module';
+import { APP_GUARD } from '@nestjs/core';
+import { AuthGuard } from './auth/auth.guard';
 
 @Module({
   imports: [
@@ -30,8 +33,14 @@ import { TipoMovimientosModule } from './tipo_movimientos/tipo_movimientos.modul
       }),
       inject: [ConfigService],
     }),
-    ProductosModule, UsuariosModule, CategoriasModule, RolesModule, InventariosModule, MovimientosModule, TipoMovimientosModule,],
+    ProductosModule, UsuariosModule, CategoriasModule, RolesModule, InventariosModule, MovimientosModule, TipoMovimientosModule, AuthModule,],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    AppService, 
+    {
+      provide: APP_GUARD,
+      useClass: AuthGuard,
+    },
+  ],
 })
 export class AppModule {}

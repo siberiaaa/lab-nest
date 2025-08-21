@@ -1,5 +1,6 @@
 import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { Inventario } from "../inventario.entity/inventario.entity";
+import { TipoMovimiento } from "../tipo_movimiento.entity/tipo_movimiento.entity";
 // import { TipoMovimiento } from "../tipo_movimiento.entity/tipo_movimiento.entity";
 
 @Entity()
@@ -20,9 +21,9 @@ export class Movimiento {
     inventario : Inventario
 
     // Dudando si dejar esto como así
-    // @ManyToOne(() => TipoMovimiento, (tipo_movimiento) => tipo_movimiento.nombre)
-    // tipo_movimiento : TipoMovimiento
+    @ManyToOne(() => TipoMovimiento, (tipo_movimiento) => tipo_movimiento.nombre)
+    tipo_movimiento : TipoMovimiento
     // o así 
-    @Column('text')
-    tipo_movimiento : string
+    // @Column('text')
+    // tipo_movimiento : string
 }

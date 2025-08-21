@@ -17,19 +17,19 @@ export class TipoMovimientosService {
     }
     
     async crear(tipo : TipoMovimientoDto) {
-        let verdad = await this.repo.findOneBy({ nombre: tipo.nombre })
+        const verdad = await this.repo.findOneBy({ nombre: tipo.nombre })
         if (verdad) throw new BadRequestException('Ya existe un tipo de movimiento con tal nombre')
         return await this.repo.save(tipo)
     }
     
     async modificar(nombre : string, tipo : TipoMovimientoDto) {
-        let verdad = await this.repo.findOneBy({ nombre: nombre })
+        const verdad = await this.repo.findOneBy({ nombre: nombre })
         if (!verdad) throw new BadRequestException('No existe ningún tipo de movimiento con tal nombre')
         return await this.repo.save({ ...verdad, ...tipo })
     }
     
     async eliminar(nombre : string) {
-        let verdad = await this.repo.findOneBy({ nombre: nombre })
+        const verdad = await this.repo.findOneBy({ nombre: nombre })
         if (!verdad) throw new BadRequestException('No existe ningún tipo de movimiento con tal nombre')
         return await this.repo.remove(verdad)
     }

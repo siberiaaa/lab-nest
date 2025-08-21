@@ -17,19 +17,19 @@ export class RolesService {
     }
 
     async crear(rol : RolDto) {
-        let verdad = await this.repo.findOneBy({ nombre: rol.nombre })
+        const verdad = await this.repo.findOneBy({ nombre: rol.nombre })
         if (verdad) throw new BadRequestException('Ya existe un rol con tal nombre')
         return await this.repo.save(rol)
     }
 
     async modificar(nombre : string, rol : RolDto) {
-        let verdad = await this.repo.findOneBy({ nombre: nombre })
+        const verdad = await this.repo.findOneBy({ nombre: nombre })
         if (!verdad) throw new BadRequestException('No existe ningún rol con tal nombre')
         return await this.repo.save({ ...verdad, ...rol })
     }
 
     async eliminar(nombre : string) {
-        let verdad = await this.repo.findOneBy({ nombre: nombre })
+        const verdad = await this.repo.findOneBy({ nombre: nombre })
         if (!verdad) throw new BadRequestException('No existe ningún rol con tal nombre')
         return await this.repo.remove(verdad)
     }
