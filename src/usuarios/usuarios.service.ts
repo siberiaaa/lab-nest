@@ -23,18 +23,13 @@ export class UsuariosService {
     }
 
     async crear(usuario: UsuarioDto) {
-        const sal = 10;
+        let verdad = await this.buscar(usuario.correo)
+        if (verdad) throw new BadRequestException('Ya existe un usuario con tal correo')
+        const sal = 11;
         const nueva_contraseña = await hash(usuario.contraseña, sal);
         usuario.contraseña = nueva_contraseña;
         const nuevo = new Usuario();
-
-        nuevo.correo = usuario.correo;
-        nuevo.nombre_usuario = usuario.nombre_usuario;
-        nuevo.nombres = usuario.nombres;
-        nuevo.apellidos = usuario.apellidos;
-        nuevo.nacimiento = usuario.nacimiento;
-        nuevo.genero = usuario.genero;
-        nuevo.contraseña = usuario.contraseña;
+        Object.assign(nuevo, usuario)
         let rol = await this.servicoRoles.buscar(usuario.rolNombre)
         if (!rol) throw new BadRequestException('No existe ese rol')
         nuevo.rol = rol

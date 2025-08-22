@@ -13,11 +13,7 @@ export class AuthService {
 
     async iniciarSesion(correo: string, contraseña: string) {
         const usuario = await this.servicoUsuario.buscar(correo);
-        console.log(usuario);
-        
-        if (!usuario) {
-            throw new BadRequestException('No existe un usuario con ese nombre');
-        }
+        if (!usuario) throw new BadRequestException('No existe un usuario con ese nombre');
         const verdad = await compare(contraseña, usuario.contraseña);
         if (verdad) {
             const info = {

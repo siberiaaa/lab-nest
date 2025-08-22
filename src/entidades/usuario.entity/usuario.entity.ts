@@ -30,7 +30,6 @@ export class Usuario {
     @UpdateDateColumn()
     modificado: Date;
 
-    @ManyToOne(() => Rol, (rol) => rol.nombre)
-    // @JoinColumn({ name: 'rolNombre' })
+    @ManyToOne(() => Rol, (rol) => rol.nombre, { eager: true })
     rol : Rol
 }

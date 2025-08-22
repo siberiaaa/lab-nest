@@ -19,10 +19,10 @@ export class Producto {
     @UpdateDateColumn()
     modificado: Date;
 
-    @ManyToOne(() => Categoria, (categoria) => categoria.nombre)
+    @ManyToOne(() => Categoria, (categoria) => categoria.nombre, { eager: true })
     categoria : Categoria
 
-    @OneToOne(() => Inventario)
+    @OneToOne(() => Inventario, { eager: true })
     @JoinColumn()
     inventario: Inventario
 }

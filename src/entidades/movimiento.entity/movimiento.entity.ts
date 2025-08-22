@@ -17,11 +17,11 @@ export class Movimiento {
     @UpdateDateColumn()
     modificado: Date;
 
-    @ManyToOne(() => Inventario, (inventario) => inventario.id)
+    @ManyToOne(() => Inventario, (inventario) => inventario.id, { eager: true })
     inventario : Inventario
 
     // Dudando si dejar esto como así
-    @ManyToOne(() => TipoMovimiento, (tipo_movimiento) => tipo_movimiento.nombre)
+    @ManyToOne(() => TipoMovimiento, (tipo_movimiento) => tipo_movimiento.nombre, { eager: true })
     tipo_movimiento : TipoMovimiento
     // o así 
     // @Column('text')

@@ -25,16 +25,20 @@ export class ProductosService {
     // if (!categoria) throw new NotFoundException('Categoría no encontrada');
 
     const nuevoInventario = this.inventarioRepository.create({
-      nombreIdentificador: `inventario-${dto.nombre}}`,
+      nombreIdentificador: `inventario-${dto.nombre}`,
       cantidadActual: 0,
     });
 
     const inventarioGuardado = await this.inventarioRepository.save(nuevoInventario);
-
+    const categoria = await this.categoriasService.buscar(dto.categoriaNombre)
+    if (!categoria) throw new NotFoundException('Categoría no encontrada');
     const nuevoProducto = this.productoRepository.create({
       ...dto,
       // categoria - se supone que la que encontramos, cuando ya esté
+      // Ya lo está :3
+      // Pero si no te funciona borra toda tu base datos y vuélvela a hacer
       inventario: inventarioGuardado,
+      categoria: categoria
     });
 
     return this.productoRepository.save(nuevoProducto);
@@ -53,7 +57,7 @@ export class ProductosService {
   async findOne(id: number) {
     const producto = await this.productoRepository.findOne({
       where: { id },
-      relations: ['categoria', 'inventario'],
+      // relations: ['categoria', 'inventario'],
     });
 
     if (!producto) {
