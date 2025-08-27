@@ -18,11 +18,8 @@ export class ProductosService {
   ) {}
 
   async crearProducto(dto: CrearProductoDto) {
-    // lógica para buscar categoria por nombre
-    //find one categoria
-    // const categoria = await this.categoriasService.findOne(dto.categoriaNombre);
-    // si no está 
-    // if (!categoria) throw new NotFoundException('Categoría no encontrada');
+    const categoria = await this.categoriasService.buscar(dto.categoriaNombre);
+    if (!categoria) throw new NotFoundException('Categoría no encontrada');
 
     const nuevoInventario = this.inventarioRepository.create({
       nombreIdentificador: `inventario-${dto.nombre}`,
@@ -30,13 +27,9 @@ export class ProductosService {
     });
 
     const inventarioGuardado = await this.inventarioRepository.save(nuevoInventario);
-    const categoria = await this.categoriasService.buscar(dto.categoriaNombre)
-    if (!categoria) throw new NotFoundException('Categoría no encontrada');
+
     const nuevoProducto = this.productoRepository.create({
       ...dto,
-      // categoria - se supone que la que encontramos, cuando ya esté
-      // Ya lo está :3
-      // Pero si no te funciona borra toda tu base datos y vuélvela a hacer
       inventario: inventarioGuardado,
       categoria: categoria
     });
@@ -57,7 +50,7 @@ export class ProductosService {
   async findOne(id: number) {
     const producto = await this.productoRepository.findOne({
       where: { id },
-      // relations: ['categoria', 'inventario'],
+      relations: ['categoria', 'inventario'],
     });
 
     if (!producto) {
@@ -67,13 +60,14 @@ export class ProductosService {
   }
 
   async update(id: number, dto: ActualizarProductoDto) {
-    // así para no repetir lógica del find one ootra vez
+
     const producto = await this.findOne(id);
 
-    // si categoriaNombre en el dto no es null, actualizar
-    // cuando este logica disponible
-    // if (dto.categoriaNombre)
-    
+    if (dto.categoriaNombre) {
+      const categoria = await this.categoriasService.buscar(dto.categoriaNombre);
+      if (!categoria) throw new NotFoundException('Categoría no encontrada');
+    }
+
     Object.assign(producto, dto);
     return this.productoRepository.save(producto);
   }

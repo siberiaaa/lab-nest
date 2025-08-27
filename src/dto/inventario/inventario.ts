@@ -9,11 +9,11 @@ export class Inventario {
     @IsNotEmpty()
     cantidadActual : number
 
-    @IsInt()
-    @IsNotEmpty()
-    maximo : number
+    // @IsInt()
+    // @IsNotEmpty()
+    // maximo : number
 
-    @IsInt()
-    @IsNotEmpty()
-    minimo : number
+    // @IsInt()
+    // @IsNotEmpty()
+    // minimo : number
 }

@@ -28,7 +28,7 @@ export class Usuario {
 
     @IsString()
     @IsNotEmpty()
-    @IsStrongPassword()
+    // @IsStrongPassword()
     contraseña : string
 
     @IsString()

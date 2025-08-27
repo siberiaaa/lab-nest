@@ -7,6 +7,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 @Module({
   imports: [TipoMovimiento, TypeOrmModule.forFeature([TipoMovimiento])], 
   providers: [TipoMovimientosService],
-  controllers: [TipoMovimientosController]
+  controllers: [TipoMovimientosController],
+  exports: [TipoMovimientosService],
 })
 export class TipoMovimientosModule {}

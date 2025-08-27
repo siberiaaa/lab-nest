@@ -13,6 +13,7 @@ import { ProductosModule } from 'src/productos/productos.module';
   ],
   controllers: [InventariosController],
   providers: [InventariosService],
+  exports: [InventariosService],
 })
 
 export class InventariosModule {}
