@@ -2,7 +2,9 @@ import { Controller, Get, Post, Body, Param, Delete, Put, Query } from '@nestjs/
 import { ProductosService } from './productos.service';
 import { CrearProductoDto } from 'src/dto/producto/crear-producto.dto';
 import { ActualizarProductoDto } from 'src/dto/producto/actualizar-producto.dto';
+import { ApiBearerAuth, ApiQuery } from '@nestjs/swagger';
 
+@ApiBearerAuth()
 @Controller('productos')
 export class ProductosController {
   constructor(private readonly productosService: ProductosService) {}
@@ -12,6 +14,11 @@ export class ProductosController {
     return this.productosService.crearProducto(crearProductoDto);
   }
 
+  @ApiQuery({
+    name: 'categoria',
+    required: false,
+    type: String
+  })
   @Get()
   findAll(@Query('categoria') categoria?: string) {
     return this.productosService.findAll(categoria);

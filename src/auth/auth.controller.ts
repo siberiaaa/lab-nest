@@ -1,9 +1,12 @@
 import { Body, Controller, Post } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { Usuario } from 'src/dto/usuario/usuario';
+import { ApiProperty } from '@nestjs/swagger';
 
-type CuerpoMensaje = { 
-    nombre_usuario: string; 
+export class CuerpoMensaje { 
+    @ApiProperty({ type: String })
+    correo: string; 
+    @ApiProperty({ type: String })
     contraseña: string 
 }
 
@@ -14,7 +17,7 @@ export class AuthController {
     @Post('/iniciar_sesion')
     async iniciar_sesion(@Body() cuerpo: CuerpoMensaje) {
         return await this.service.iniciarSesion(
-            cuerpo.nombre_usuario,
+            cuerpo.correo,
             cuerpo.contraseña,
         );
     }

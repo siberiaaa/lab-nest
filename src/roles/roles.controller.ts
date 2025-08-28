@@ -1,7 +1,9 @@
 import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 import { RolesService } from './roles.service';
 import { Rol } from 'src/dto/rol/rol';
+import { ApiBearerAuth } from '@nestjs/swagger';
 
+@ApiBearerAuth()
 @Controller('roles')
 export class RolesController {
     constructor(private readonly service : RolesService) {}

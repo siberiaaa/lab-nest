@@ -1,7 +1,9 @@
 import { Body, Controller, Param, Post } from '@nestjs/common';
 import { MovimientosService } from './movimientos.service';
 import { RegistrarMovimientoDto } from 'src/dto/movimiento/registrar-movimiento.dto';
+import { ApiBearerAuth } from '@nestjs/swagger';
 
+@ApiBearerAuth()
 @Controller('movimientos')
 export class MovimientosController {
   constructor(private readonly movimientosService: MovimientosService) {}
