@@ -13,7 +13,6 @@ import { TipoMovimientosModule } from './tipo_movimientos/tipo_movimientos.modul
 import { AuthModule } from './auth/auth.module';
 import { APP_GUARD } from '@nestjs/core';
 import { AuthGuard } from './auth/auth.guard';
-import { SwaggerModule } from '@nestjs/swagger';
 
 @Module({
   imports: [
