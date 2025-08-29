@@ -1,7 +1,7 @@
 import { Body, Controller, Post } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { Usuario } from 'src/dto/usuario/usuario';
-import { ApiProperty, ApiTags } from '@nestjs/swagger';
+import { ApiOperation, ApiProperty, ApiTags } from '@nestjs/swagger';
 
 export class CuerpoMensaje { 
     @ApiProperty({ type: String })
@@ -16,6 +16,7 @@ export class AuthController {
     constructor(private readonly service: AuthService) {}
 
     @Post('/iniciar_sesion')
+    @ApiOperation({ summary: 'Inicia sesión del usuario' })
     async iniciar_sesion(@Body() cuerpo: CuerpoMensaje) {
         return await this.service.iniciarSesion(
             cuerpo.correo,
@@ -24,6 +25,7 @@ export class AuthController {
     }
 
     @Post('/registrar')
+    @ApiOperation({ summary: 'Registra a los usuarios' })
     async registrar_usuario(@Body() cuerpo: Usuario) {
         return await this.service.registrarUsuario(cuerpo);
     }

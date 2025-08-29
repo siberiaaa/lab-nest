@@ -14,7 +14,7 @@ export class AuthGuard implements CanActivate {
 
     async canActivate(context: ExecutionContext) {
         const request = context.switchToHttp().getRequest() as Request;
-        if ((request.path.includes('auth') || request.method == 'GET') 
+        if ((request.path.includes('auth')) 
             && !request.path.includes('usuarios')) return true
         const token = this.obtenerDelHeader(request);
         if (!token) {
