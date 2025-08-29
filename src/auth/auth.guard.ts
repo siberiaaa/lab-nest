@@ -28,7 +28,7 @@ export class AuthGuard implements CanActivate {
         } catch {
             throw new UnauthorizedException('No tiene el token');
         }
-        if (payload.tipo != 'admin') {
+        if (payload.tipo != 'admin' && request.method != 'GET') {
             throw new UnauthorizedException('No tiene permiso por no ser admin');
         }
         return true;
