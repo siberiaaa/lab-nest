@@ -12,7 +12,7 @@ export class FiltroFilter<T> implements ExceptionFilter {
     response
       .status(status)
       .json({
-        statusCode: status,
+        estatus: status,
         momento: new Date().toISOString(),
         direccion: request.url,
         token: request.get('Authorization'), 
