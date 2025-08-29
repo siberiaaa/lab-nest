@@ -9,6 +9,9 @@ export class TipoMovimiento {
     @Column('text')
     descripcion : string
 
+    @Column('text')
+    accion : string
+
     @CreateDateColumn()
     registrado: Date;
     

@@ -33,9 +33,9 @@ export class MovimientosService {
       );
     }
 
-    if (tipoMovimiento.nombre === 'salida') {
+    if (tipoMovimiento.accion === '-') {
       return this.registrarSalida(productoId, inventario, dto.cantidad, tipoMovimiento);
-    } else if (tipoMovimiento.nombre === 'entrada') {
+    } else if (tipoMovimiento.accion === '+') {
       return this.registrarEntrada(productoId, inventario, dto.cantidad, tipoMovimiento);
     } else {
       throw new BadRequestException(

@@ -1,9 +1,10 @@
 import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 import { CategoriasService } from './categorias.service';
 import { Categoria } from 'src/dto/categoria/categoria';
-import { ApiBearerAuth } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
 @ApiBearerAuth()
+@ApiTags('Categorías')
 @Controller('categorias')
 export class CategoriasController {
     constructor(private readonly service : CategoriasService) {}

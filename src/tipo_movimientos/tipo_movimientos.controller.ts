@@ -1,9 +1,10 @@
 import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 import { TipoMovimientosService } from './tipo_movimientos.service';
 import { TipoMovimiento } from 'src/dto/tipo_movimiento/tipo_movimiento';
-import { ApiBearerAuth } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
 @ApiBearerAuth()
+@ApiTags('Tipos de movimientos')
 @Controller('tipo-movimientos')
 export class TipoMovimientosController {
     constructor(private readonly service : TipoMovimientosService) {}

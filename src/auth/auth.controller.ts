@@ -1,7 +1,7 @@
 import { Body, Controller, Post } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { Usuario } from 'src/dto/usuario/usuario';
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty, ApiTags } from '@nestjs/swagger';
 
 export class CuerpoMensaje { 
     @ApiProperty({ type: String })
@@ -10,6 +10,7 @@ export class CuerpoMensaje {
     contraseña: string 
 }
 
+@ApiTags('Autenticación')
 @Controller('auth')
 export class AuthController {
     constructor(private readonly service: AuthService) {}

@@ -11,4 +11,12 @@ export class TipoMovimiento {
     @IsString()
     @IsNotEmpty()
     descripcion : string
+
+    @ApiProperty({ 
+        type: String, 
+        example: '+', 
+        description: 'Este dato tiene que ser la operación aritmética que hará este tipo de movimiento' })
+    @IsString()
+    @IsNotEmpty()
+    accion : string
 }
