@@ -29,8 +29,12 @@ export class CategoriasService {
     }
 
     async eliminar(nombre : string) {
-        const verdad = await this.repo.findOneBy({ nombre: nombre })
-        if (!verdad) throw new BadRequestException('No existe una categoría con tal nombre')
-        return await this.repo.remove(verdad)
+        try {
+            const verdad = await this.repo.findOneBy({ nombre: nombre })
+            if (!verdad) throw new BadRequestException('No existe una categoría con tal nombre')
+            return await this.repo.remove(verdad)
+        } catch (error) {
+            throw new BadRequestException('No se puede eliminar una categoría que ya este siendo usada')
+        }
     }
 }

@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CategoriasService } from 'src/categorias/categorias.service';
 import { ActualizarProductoDto } from 'src/dto/producto/actualizar-producto.dto';
@@ -74,13 +74,17 @@ export class ProductosService {
 
   async remove(id: number) {
     // así para no repetir lógica del find one ootra vez
-    const producto = await this.findOne(id);
-    await this.productoRepository.remove(producto);
-    
-    // que elimine tambien su inventario
-    if (producto.inventario) {
-        await this.inventarioRepository.remove(producto.inventario);
+    try {
+      const producto = await this.findOne(id);
+      await this.productoRepository.remove(producto);
+      
+      // que elimine tambien su inventario
+      if (producto.inventario) {
+          await this.inventarioRepository.remove(producto.inventario);
+      }
+      return { message: `Producto con ID ${id} eliminado` };
+    } catch (error) {
+      throw new BadRequestException('No se puede eliminar un producto que tenga movimientos')
     }
-    return { message: `Producto con ID ${id} eliminado` };
   }
 }

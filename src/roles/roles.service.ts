@@ -29,8 +29,12 @@ export class RolesService {
     }
 
     async eliminar(nombre : string) {
-        const verdad = await this.repo.findOneBy({ nombre: nombre })
-        if (!verdad) throw new BadRequestException('No existe ningún rol con tal nombre')
-        return await this.repo.remove(verdad)
+        try {
+            const verdad = await this.repo.findOneBy({ nombre: nombre })
+            if (!verdad) throw new BadRequestException('No existe ningún rol con tal nombre')
+            return await this.repo.remove(verdad)
+        } catch (error) {
+            throw new BadRequestException('No se puede eliminar roles que ya son usados')
+        }
     }
 }
