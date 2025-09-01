@@ -17,7 +17,7 @@ async function bootstrap() {
   SwaggerModule.setup('api', app, documentFactory);
   app.useGlobalFilters(new FiltroFilter());
   await app.listen(process.env.PORT ?? 3000);
-  console.log('http://localhost:3000');
+  console.log('http://localhost:3000/api');
   
 }
 void bootstrap();
